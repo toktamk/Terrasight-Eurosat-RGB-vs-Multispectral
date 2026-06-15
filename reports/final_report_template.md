@@ -234,7 +234,19 @@ Band sets evaluated:
 * RGB + NIR + Red Edge + SWIR
 * Full 13 Bands
 
+## Experimental Results
 
+[Insert final model comparison, confusion matrix interpretation, and class-wise results here.]
+
+## Reliability Results
+
+Reliability analysis framework is implemented in the repository. Full calibration and robustness experiments are treated as future work unless generated before submission.
+
+## Reliability Results
+
+The repository includes modules for calibration, uncertainty, and robustness analysis, including Expected Calibration Error, Brier score, predictive entropy, confidence-margin analysis, and perturbation-based robustness testing. These components establish the reliability evaluation framework for deployment-oriented assessment.
+
+In the current submission, the main completed reliability-related analysis is class-level error behaviour through confusion matrices and per-class F1 scores. Full calibration plots and robustness stress tests are reserved for future work.
 
 ## Evaluation Metrics
 

@@ -1,0 +1,6 @@
+question,comparison,target_classes,mean_f1_gain,conclusion
+Does NIR help vegetation classes?,RGB+NIR minus RGB,"AnnualCrop, Forest, HerbaceousVegetation, Pasture, PermanentCrop",0.00502433380243994,Yes. NIR improves vegetation-class F1 on average.
+Does RedEdge improve crop discrimination?,RGB+RedEdge+NIR minus RGB+NIR,"AnnualCrop, HerbaceousVegetation, PermanentCrop",0.001543122547854714,RedEdge provides a small positive crop-discrimination gain.
+Does SWIR improve urban/water separation?,RGB+RedEdge+NIR+SWIR minus RGB+RedEdge+NIR,"Highway, Industrial, Residential, River, SeaLake",0.0012900298289483469,SWIR provides a small positive gain for urban/water-related classes.
+Does removing B10 help?,Full13NoB10 minus Full13,All classes,0.0036462257583700364,Removing B10 gives a small positive Macro-F1 gain.
+Do atmospheric bands reduce performance?,PhysicalBands minus Full13,All classes,0.008481449880808012,"Yes. Surface-focused physical bands outperform Full13, suggesting atmospheric bands reduce performance."

@@ -1,0 +1,41 @@
+analysis,true_class,predicted_class,before_model,after_model,before_errors,after_errors,error_reduction
+NIR confusion change,AnnualCrop,PermanentCrop,RGB,RGB+NIR,19,8,11
+NIR confusion change,PermanentCrop,AnnualCrop,RGB,RGB+NIR,15,31,-16
+NIR confusion change,HerbaceousVegetation,PermanentCrop,RGB,RGB+NIR,23,7,16
+NIR confusion change,PermanentCrop,HerbaceousVegetation,RGB,RGB+NIR,23,36,-13
+NIR confusion change,River,Highway,RGB,RGB+NIR,14,19,-5
+NIR confusion change,Highway,River,RGB,RGB+NIR,4,0,4
+NIR confusion change,Industrial,Residential,RGB,RGB+NIR,10,10,0
+NIR confusion change,Residential,Industrial,RGB,RGB+NIR,3,4,-1
+RedEdge confusion change,AnnualCrop,PermanentCrop,RGB+NIR,RGB+RedEdge+NIR,8,22,-14
+RedEdge confusion change,PermanentCrop,AnnualCrop,RGB+NIR,RGB+RedEdge+NIR,31,14,17
+RedEdge confusion change,HerbaceousVegetation,PermanentCrop,RGB+NIR,RGB+RedEdge+NIR,7,21,-14
+RedEdge confusion change,PermanentCrop,HerbaceousVegetation,RGB+NIR,RGB+RedEdge+NIR,36,15,21
+RedEdge confusion change,River,Highway,RGB+NIR,RGB+RedEdge+NIR,19,5,14
+RedEdge confusion change,Highway,River,RGB+NIR,RGB+RedEdge+NIR,0,5,-5
+RedEdge confusion change,Industrial,Residential,RGB+NIR,RGB+RedEdge+NIR,10,12,-2
+RedEdge confusion change,Residential,Industrial,RGB+NIR,RGB+RedEdge+NIR,4,5,-1
+SWIR confusion change,AnnualCrop,PermanentCrop,RGB+RedEdge+NIR,RGB+RedEdge+NIR+SWIR,22,20,2
+SWIR confusion change,PermanentCrop,AnnualCrop,RGB+RedEdge+NIR,RGB+RedEdge+NIR+SWIR,14,11,3
+SWIR confusion change,HerbaceousVegetation,PermanentCrop,RGB+RedEdge+NIR,RGB+RedEdge+NIR+SWIR,21,14,7
+SWIR confusion change,PermanentCrop,HerbaceousVegetation,RGB+RedEdge+NIR,RGB+RedEdge+NIR+SWIR,15,22,-7
+SWIR confusion change,River,Highway,RGB+RedEdge+NIR,RGB+RedEdge+NIR+SWIR,5,7,-2
+SWIR confusion change,Highway,River,RGB+RedEdge+NIR,RGB+RedEdge+NIR+SWIR,5,3,2
+SWIR confusion change,Industrial,Residential,RGB+RedEdge+NIR,RGB+RedEdge+NIR+SWIR,12,7,5
+SWIR confusion change,Residential,Industrial,RGB+RedEdge+NIR,RGB+RedEdge+NIR+SWIR,5,6,-1
+B10 removal confusion change,AnnualCrop,PermanentCrop,Full13,Full13NoB10,15,6,9
+B10 removal confusion change,PermanentCrop,AnnualCrop,Full13,Full13NoB10,27,35,-8
+B10 removal confusion change,HerbaceousVegetation,PermanentCrop,Full13,Full13NoB10,38,23,15
+B10 removal confusion change,PermanentCrop,HerbaceousVegetation,Full13,Full13NoB10,20,25,-5
+B10 removal confusion change,River,Highway,Full13,Full13NoB10,1,8,-7
+B10 removal confusion change,Highway,River,Full13,Full13NoB10,10,8,2
+B10 removal confusion change,Industrial,Residential,Full13,Full13NoB10,10,4,6
+B10 removal confusion change,Residential,Industrial,Full13,Full13NoB10,6,4,2
+Atmospheric-band confusion change,AnnualCrop,PermanentCrop,Full13,PhysicalBands,15,12,3
+Atmospheric-band confusion change,PermanentCrop,AnnualCrop,Full13,PhysicalBands,27,17,10
+Atmospheric-band confusion change,HerbaceousVegetation,PermanentCrop,Full13,PhysicalBands,38,15,23
+Atmospheric-band confusion change,PermanentCrop,HerbaceousVegetation,Full13,PhysicalBands,20,21,-1
+Atmospheric-band confusion change,River,Highway,Full13,PhysicalBands,1,14,-13
+Atmospheric-band confusion change,Highway,River,Full13,PhysicalBands,10,2,8
+Atmospheric-band confusion change,Industrial,Residential,Full13,PhysicalBands,10,22,-12
+Atmospheric-band confusion change,Residential,Industrial,Full13,PhysicalBands,6,4,2
