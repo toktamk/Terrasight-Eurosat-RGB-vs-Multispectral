@@ -2,17 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6f775f8-462f-4a6e-89e6-cc5c10724014" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/check_report_assets.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/final_model_comparison.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_class_level_analysis.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_comparison_figures.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_confusion_matrices.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/v4_scientific_conclusions.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_failure_cases.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_gradcam_examples.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_industrial_discussion.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_prediction_probabilities.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_reliability_analysis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_robustness_analysis.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/statistical_analysis.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PROJECT_SOURCE_EXPORT.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/experiments/registry.csv" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/registry.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/reports/figures/v1_model_comparison.png" beforeDir="false" afterPath="$PROJECT_DIR$/reports/figures/v1_model_comparison.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
