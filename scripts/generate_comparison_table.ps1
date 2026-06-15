@@ -1,0 +1,1 @@
+python -m terrasight.reporting.comparison --registry experiments\registry.csv --output reports\tables\comparison_table.csv

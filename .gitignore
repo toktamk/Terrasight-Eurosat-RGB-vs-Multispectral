@@ -1,0 +1,14 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+docs/
+*.docx
+*.pdf
+data/raw/
+data/processed/
+results/
+*.pt
+*.pth
+*.ckpt
+.DS_Store

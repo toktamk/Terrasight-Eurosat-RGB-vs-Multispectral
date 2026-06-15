@@ -1,0 +1,52 @@
+experiment:
+  id: v4_ablation_rgb_rededge_nir_resnet18_pretrained_adapted_seed42
+  version: v4
+  description: Band ablation study using RGB, red-edge, NIR, and narrow NIR bands.
+
+seed: 42
+
+data:
+  dataset: eurosat
+  input_type: multispectral
+  data_root: data/raw/multispectral
+  split_dir: data/splits
+  bands:
+    - B4
+    - B3
+    - B2
+    - B5
+    - B6
+    - B7
+    - B8
+    - B8A
+  split:
+    strategy: stratified
+    train_ratio: 0.8
+    test_ratio: 0.2
+
+model:
+  name: resnet18
+  num_classes: 10
+  input_channels: 8
+  pretrained: true
+
+training:
+  epochs: 50
+  early_stopping:
+    enabled: true
+    monitor: macro_f1
+    patience: 7
+    min_delta: 0.001
+  batch_size: 32
+  optimizer: adamw
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  scheduler: none
+
+evaluation:
+  metrics:
+    - accuracy
+    - macro_f1
+    - weighted_f1
+    - balanced_accuracy
+    - confusion_matrix
