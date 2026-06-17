@@ -209,6 +209,39 @@ Investigation of model behaviour through Grad-CAM visualizations, confidence ana
 
 Experiment tracking, configuration management, reproducible pipelines, and documented workflows suitable for future extension.
 
+## Execution Environment
+
+Experiments reported in this repository were executed using the following environment:
+
+| Component | Value |
+|------------|---------|
+| PyTorch | 2.12.0+cpu |
+| CUDA Available | False |
+| CUDA Version | None |
+| GPU Count | 0 |
+| Execution Mode | CPU-only |
+| Random Seed | 42 |
+
+The framework is hardware-agnostic and supports GPU acceleration when CUDA-enabled PyTorch installations are available.
+
+## Computational Considerations
+
+The project was intentionally developed and evaluated on CPU-only hardware.
+
+This demonstrates that:
+
+- the framework is reproducible without specialised GPU resources;
+- all reported experiments can be reproduced on standard research workstations;
+- architectural choices prioritise reproducibility and practicality alongside performance.
+
+Training times can be significantly reduced using CUDA-enabled GPUs without modifying the implementation.
+
+### Computational Constraints
+
+The framework was intentionally developed and evaluated under modest computational resources using CPU-only execution. This demonstrates that the proposed methodology can be reproduced without specialized hardware and remains accessible to researchers and practitioners with limited computational infrastructure.
+
+Future work could investigate larger architectures, foundation models, and extensive hyperparameter optimization using GPU-accelerated environments.
+
 ## Dataset
 
 ### EuroSAT
@@ -259,7 +292,13 @@ These bands capture complementary information related to vegetation health, mois
 > Helber, P., Bischke, B., Dengel, A., & Borth, D. (2019). EuroSAT: A Novel Dataset and Deep Learning Benchmark for Land Use and Land Cover Classification. *IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing*.
 
 ## Methodology
+#### Hyperparameter Strategy
 
+A fixed hyperparameter configuration was used across comparable experiments to ensure a fair controlled comparison between RGB and multispectral inputs. The objective of this project was not exhaustive hyperparameter optimization, but a scientifically controlled evaluation of spectral information.
+
+Core training settings, including optimizer, learning rate, batch size, number of epochs, early-stopping patience, and random seed, were defined in YAML configuration files and kept consistent across matched experiments.
+
+This design prevents performance differences from being confounded by unequal tuning effort. Hyperparameter optimization is therefore treated as future work rather than a primary component of the current assessment.
 ### Experimental Design
 
 The project follows a progressive experimental strategy designed to evaluate both predictive performance and spectral utility.
@@ -417,7 +456,7 @@ terrasight-eurosat-rgb-vs-multispectral/
 ├── src/                # Core source code
 ├── tests/              # Automated tests
 └── README.md
-````
+```
 
 # Experimental Results
 
@@ -508,6 +547,18 @@ Most classes achieve strong classification performance across all models. Remain
 - River and surrounding vegetation classes
 
 These confusions reflect intrinsic visual and spectral similarities within the EuroSAT taxonomy rather than obvious model failures.
+
+#### Overfitting Assessment
+
+The training dynamics do not indicate severe overfitting. Both the RGB-pretrained and adapted multispectral models exhibit stable convergence behaviour, with training and validation losses decreasing consistently throughout optimization.
+
+The validation curves closely follow the training curves, suggesting good generalization to unseen data. Early stopping was employed during training to prevent unnecessary optimization after validation performance ceased improving.
+
+A mild overfitting pattern was observed in the Full13 multispectral configuration during the band-ablation study, where validation loss reached its minimum early and subsequently increased. This behaviour suggests that incorporating all available Sentinel-2 bands may introduce redundant or less informative spectral information.
+
+In contrast, the best-performing spectral subset (RGB + RedEdge + NIR + SWIR) demonstrated stable convergence and superior generalization performance. These findings support the conclusion that careful spectral-band selection not only improves classification accuracy but may also reduce overfitting risk compared with using the complete Sentinel-2 spectral stack.
+
+To improve generalization, training employed data augmentation, transfer learning, and early stopping. Because the validation curves did not exhibit severe overfitting, additional regularization techniques such as dropout were not required.
 
 ## V4: Sentinel-2 Band Ablation Study
 
@@ -810,31 +861,18 @@ cd Terrasight-Eurosat-RGB-vs-Multispectral
 ### Create Environment
 
 ```bash
-python -m venv .venv && source .venv/bin/activate
+python -m venv .venv 
+source .venv/bin/activate
+python -m pip install --upgrade pip
 ```
 
 ### Install Dependencies
 
 ```bash
+pip install -e .
 pip install -r requirements.txt
+python -c "import terrasight; print('Installation successful')"
 ```
-
-### Verify Environment
-
-```bash
-python scripts/system_info.py
-```
-
-Example environment:
-
-```text
-PyTorch: 2.12.0+cpu
-CUDA Available: False
-CUDA Version: None
-GPU Count: 0
-```
-
----
 
 ## Dataset Preparation
 
@@ -934,6 +972,8 @@ Several limitations should be considered when interpreting the results:
 3. Only ResNet18-based architectures were evaluated.
 4. Grad-CAM provides qualitative rather than causal explanations.
 5. Results may not directly generalize to other geographic regions or sensors.
+
+Experiments were conducted under CPU-only computational constraints; therefore extensive hyperparameter optimization and large-scale architecture benchmarking were outside the scope of this study.
 
 ## Industrial Relevance
 
