@@ -307,6 +307,102 @@ Beyond classification accuracy, the framework evaluates:
 
 This enables a more comprehensive assessment of model trustworthiness and practical deployment suitability.
 
+## Project Evolution and Results Organization
+
+The TerraSight project was originally designed as a staged research framework consisting of four progressive development phases.
+
+### V1 — Assessment Compliance
+
+This phase established the mandatory project foundation and assessment requirements, including:
+
+- EuroSAT dataset preparation
+- RGB baseline model
+- Multispectral classification model
+- Reproducible train/test split
+- Training and evaluation pipelines
+- Configuration-driven experiments
+- Experiment tracking and reporting
+
+The outputs of this phase are stored in the baseline experiment results and form the foundation for all subsequent analyses.
+
+### V2 — Scientific Experimental Validation
+
+The objective of V2 was to strengthen the scientific rigor of the RGB-versus-multispectral comparison.
+
+Implemented activities included:
+
+- Experiment registry and tracking
+- Class-wise performance analysis
+- Confusion-matrix generation
+- RGB-versus-multispectral comparison tables
+- Structured result logging
+- Comparative performance visualization
+- Reproducibility verification
+
+Rather than creating a separate `results/v2/` directory, these analyses were integrated directly into the reporting framework and generated from the baseline experiment outputs. Consequently, V2 primarily produced derived analytical artifacts rather than independent model-training runs.
+
+Key V2 outputs include:
+
+- RGB vs Multispectral comparison tables
+- Class-wise performance analysis
+- Confusion matrices
+- Performance comparison figures
+- Experiment registry (`experiments/registry.csv`)
+
+### V3 — Reliability and Explainability
+
+The goal of V3 was to investigate model trustworthiness beyond conventional accuracy metrics.
+
+Implemented components include:
+
+- Calibration analysis
+- Expected Calibration Error (ECE)
+- Reliability diagrams
+- Confidence-distribution analysis
+- High-confidence failure analysis
+- Grad-CAM visual explanations
+- Confusion-pair explainability analysis
+- Spectral attribution and band-importance analysis
+- Robustness and perturbation experiments
+
+These analyses operate on trained models generated during V1 and V4 rather than producing new standalone training results. Therefore, V3 outputs are organized within dedicated reporting directories instead of a separate `results/v3/` experiment directory.
+
+Key V3 outputs include:
+
+- Reliability diagrams
+- Confidence histograms
+- Grad-CAM visualizations
+- High-confidence failure analyses
+- Spectral attribution results
+- Robustness analyses
+- Calibration metrics
+
+### V4 — Spectral Analysis and Advanced Evaluation
+
+The final phase focused on understanding the contribution of Sentinel-2 spectral information through controlled experiments.
+
+Implemented activities include:
+
+- Sentinel-2 band-ablation studies
+- Spectral subset evaluation
+- RGB versus multispectral comparisons
+- Spectral sensitivity analysis
+- Robustness-based band importance estimation
+- Advanced scientific interpretation
+
+Because V4 introduced new model-training experiments and generated substantial independent outputs, these results are stored in dedicated experiment directories and constitute the largest experimental component of the project.
+
+## Why There Are No Dedicated `results/v2` and `results/v3` Directories
+
+V2 and V3 primarily represent analytical and evaluation stages rather than independent model-development stages.
+
+Their outputs are derived from models trained during V1 and V4 and are therefore stored within:
+
+```text
+reports/figures/
+reports/tables/
+```
+
 ## Repository Structure
 
 ```text
