@@ -553,7 +553,6 @@ The ablation study reveals several important observations:
 
 These findings support the conclusion that **spectral selection is more important than spectral quantity**.
 
----
 
 ## Reliability and Calibration Analysis
 
@@ -626,7 +625,6 @@ The experimental results support four primary conclusions:
 
 The following sections investigate model reliability, explainability, robustness, and failure modes in greater detail.
 
-````markdown
 # Explainability, Robustness, Reproducibility, and Deployment
 
 This section investigates model behaviour beyond classification accuracy, focusing on explainability, robustness, reproducibility, and practical deployment considerations.
