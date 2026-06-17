@@ -1,0 +1,64 @@
+{
+  "n_completed": 3,
+  "n_total": 3,
+  "summary": {
+    "accuracy_mean": 0.9564814814814815,
+    "accuracy_std": 0.001766554076698081,
+    "macro_f1_mean": 0.9555068188009536,
+    "macro_f1_std": 0.0016361662155064802,
+    "weighted_f1_mean": 0.9564872686306289,
+    "weighted_f1_std": 0.001607927542677307,
+    "balanced_accuracy_mean": 0.9546944444444444,
+    "balanced_accuracy_std": 0.0007122603560600562,
+    "macro_precision_mean": 0.9569674498646953,
+    "macro_precision_std": 0.0029744869311753084,
+    "macro_recall_mean": 0.9546944444444444,
+    "macro_recall_std": 0.0007122603560600562,
+    "loss_mean": 0.14325083274601233,
+    "loss_std": 0.012664014584672438
+  },
+  "runs": [
+    {
+      "seed": 42,
+      "experiment_id": "v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42",
+      "run_dir": "C:\\Users\\DELL Precision 5550\\Documents\\GitHub\\Terrasight-Eurosat-RGB-vs-Multispectral\\results\\v4\\20260616_091046_v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42",
+      "status": "completed",
+      "accuracy": 0.9566666666666667,
+      "macro_f1": 0.9555508997622837,
+      "weighted_f1": 0.9567428923949031,
+      "balanced_accuracy": 0.9543000000000001,
+      "macro_precision": 0.957293317407579,
+      "macro_recall": 0.9543000000000001,
+      "loss": 0.12889302540018602,
+      "epoch": 3
+    },
+    {
+      "seed": 43,
+      "experiment_id": "v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed43",
+      "run_dir": "C:\\Users\\DELL Precision 5550\\Documents\\GitHub\\Terrasight-Eurosat-RGB-vs-Multispectral\\results\\v4\\20260616_103046_v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed43",
+      "status": "completed",
+      "accuracy": 0.9546296296296296,
+      "macro_f1": 0.9538490575200292,
+      "weighted_f1": 0.9547668414933678,
+      "balanced_accuracy": 0.9542666666666666,
+      "macro_precision": 0.9538434469852953,
+      "macro_recall": 0.9542666666666666,
+      "loss": 0.15283125501470984,
+      "epoch": 8
+    },
+    {
+      "seed": 44,
+      "experiment_id": "v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed44",
+      "run_dir": "C:\\Users\\DELL Precision 5550\\Documents\\GitHub\\Terrasight-Eurosat-RGB-vs-Multispectral\\results\\v4\\20260616_120736_v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed44",
+      "status": "completed",
+      "accuracy": 0.9581481481481482,
+      "macro_f1": 0.9571204991205479,
+      "weighted_f1": 0.957952072003616,
+      "balanced_accuracy": 0.9555166666666667,
+      "macro_precision": 0.9597655852012116,
+      "macro_recall": 0.9555166666666667,
+      "loss": 0.14802821782314116,
+      "epoch": 10
+    }
+  ]
+}

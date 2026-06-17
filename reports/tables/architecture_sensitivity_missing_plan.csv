@@ -1,0 +1,7 @@
+architecture_group,model,status,recommended
+rgb,resnet18,available,True
+rgb,resnet50,missing,True
+rgb,efficientnet_b0,missing,True
+best_multispectral_subset,resnet18,available,True
+best_multispectral_subset,resnet50,missing,True
+best_multispectral_subset,efficientnet_b0,missing,True
