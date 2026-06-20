@@ -1,0 +1,17 @@
+{
+  "experiment_id": "v5_rgb_resnet50_pretrained_seed42",
+  "run_dir": "results\\v5\\20260618_202648_v5_rgb_resnet50_pretrained_seed42",
+  "checkpoint": "results\\v5\\20260618_202648_v5_rgb_resnet50_pretrained_seed42\\best_model.pt",
+  "n_samples": 3000,
+  "n_features": 2048,
+  "methods": [
+    "tsne",
+    "umap"
+  ],
+  "tsne_embedding_csv": "reports\\tables\\feature_space\\v5_rgb_resnet50_pretrained_seed42_tsne_embedding.csv",
+  "tsne_class_plot": "reports\\figures\\feature_space\\v5_rgb_resnet50_pretrained_seed42_tsne_by_class.png",
+  "tsne_correctness_plot": "reports\\figures\\feature_space\\v5_rgb_resnet50_pretrained_seed42_tsne_by_correctness.png",
+  "umap_embedding_csv": "reports\\tables\\feature_space\\v5_rgb_resnet50_pretrained_seed42_umap_embedding.csv",
+  "umap_class_plot": "reports\\figures\\feature_space\\v5_rgb_resnet50_pretrained_seed42_umap_by_class.png",
+  "umap_correctness_plot": "reports\\figures\\feature_space\\v5_rgb_resnet50_pretrained_seed42_umap_by_correctness.png"
+}

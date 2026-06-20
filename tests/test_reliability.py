@@ -10,11 +10,10 @@ from terrasight.reliability.failure_analysis import (
     confusion_pairs,
     extract_failure_indices,
 )
-from terrasight.reliability.robustness import (
-    add_gaussian_noise,
-    apply_brightness_shift,
-    compute_degradation,
-    dropout_bands,
+from terrasight.reliability.robustness_testing import (
+    brightness_shift,
+    dropout_band,
+    gaussian_noise,
 )
 from terrasight.reliability.uncertainty import (
     confidence_error_flags,
@@ -103,21 +102,30 @@ def test_confusion_pairs() -> None:
     assert pairs[0]["predicted_class"] == "C"
     assert pairs[0]["count"] == 2
 
-
 def test_robustness_transforms() -> None:
     images = torch.ones((2, 13, 4, 4))
 
-    noisy = add_gaussian_noise(images, std=0.01)
-    bright = apply_brightness_shift(images, shift=0.1)
-    dropped = dropout_bands(images, band_indices=[0, 1])
+    noise_perturbation = gaussian_noise(std=0.01)
+    brightness_perturbation = brightness_shift(delta=0.1)
+    band_dropout_0 = dropout_band(band_index=0)
+    band_dropout_1 = dropout_band(band_index=1)
+
+    noisy = noise_perturbation.function(images)
+    bright = brightness_perturbation.function(images)
+    dropped = band_dropout_1.function(band_dropout_0.function(images))
 
     assert noisy.shape == images.shape
     assert bright.shape == images.shape
+    assert dropped.shape == images.shape
     assert torch.all(dropped[:, 0, :, :] == 0)
     assert torch.all(dropped[:, 1, :, :] == 0)
 
 
-def test_compute_degradation() -> None:
-    degradation = compute_degradation(clean_metric=0.95, perturbed_metric=0.90)
+def test_robustness_metric_degradation() -> None:
+    clean_metric = 0.95
+    perturbed_metric = 0.90
+
+    degradation = clean_metric - perturbed_metric
 
     assert abs(degradation - 0.05) < 1e-8
+

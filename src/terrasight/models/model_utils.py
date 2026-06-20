@@ -43,17 +43,33 @@ def replace_first_conv(
     model.conv1 = new_conv
     return model
 
+def replace_classifier(model, num_classes: int):
+    import torch.nn as nn
 
-def replace_classifier(
-    model: nn.Module,
-    num_classes: int,
-) -> nn.Module:
-    """Replace final classifier layer of a ResNet-style model."""
+    # ResNet
+    if hasattr(model, "fc"):
+        in_features = model.fc.in_features
+        model.fc = nn.Linear(in_features, num_classes)
+        return model
 
-    if not hasattr(model, "fc"):
-        raise ValueError("Model does not have attribute 'fc'.")
+    # EfficientNet
+    if hasattr(model, "classifier"):
+        if isinstance(model.classifier, nn.Sequential):
+            in_features = model.classifier[-1].in_features
+            model.classifier[-1] = nn.Linear(
+                in_features,
+                num_classes,
+            )
+        else:
+            in_features = model.classifier.in_features
+            model.classifier = nn.Linear(
+                in_features,
+                num_classes,
+            )
 
-    in_features = model.fc.in_features
-    model.fc = nn.Linear(in_features, num_classes)
+        return model
 
-    return model
+    raise ValueError(
+        f"Unsupported model type: {model.__class__.__name__}"
+    )
+

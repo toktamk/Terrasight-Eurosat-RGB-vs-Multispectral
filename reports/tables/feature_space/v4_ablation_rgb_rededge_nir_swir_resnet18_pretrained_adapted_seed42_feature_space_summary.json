@@ -1,0 +1,17 @@
+{
+  "experiment_id": "v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42",
+  "run_dir": "results\\v4\\20260614_165954_v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42",
+  "checkpoint": "results\\v4\\20260614_165954_v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42\\best_model.pt",
+  "n_samples": 3000,
+  "n_features": 512,
+  "methods": [
+    "tsne",
+    "umap"
+  ],
+  "tsne_embedding_csv": "reports\\tables\\feature_space\\v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_tsne_embedding.csv",
+  "tsne_class_plot": "reports\\figures\\feature_space\\v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_tsne_by_class.png",
+  "tsne_correctness_plot": "reports\\figures\\feature_space\\v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_tsne_by_correctness.png",
+  "umap_embedding_csv": "reports\\tables\\feature_space\\v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_umap_embedding.csv",
+  "umap_class_plot": "reports\\figures\\feature_space\\v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_umap_by_class.png",
+  "umap_correctness_plot": "reports\\figures\\feature_space\\v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_umap_by_correctness.png"
+}

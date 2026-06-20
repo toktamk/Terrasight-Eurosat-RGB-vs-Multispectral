@@ -2,10 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6f775f8-462f-4a6e-89e6-cc5c10724014" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/docs/Reliability_report.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/docs/explaiability_failure_analysis.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reproducibility_checklist.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/reproducibility_status.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scripts/generate_reproducibility_status.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/explainability/spectral_signatures.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_band_occlusion.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_class_specific_importance.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_feature_space_plots.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_spectral_attribution.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_spectral_separability.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/plot_per_class_f1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/reproducibility_report.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/reproducibility_report.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/experiments/registry.csv" beforeDir="false" afterPath="$PROJECT_DIR$/experiments/registry.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/graphical_abstract.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_architecture.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/figures/failure_cases/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_high_confidence_failures.csv" beforeDir="false" afterPath="$PROJECT_DIR$/reports/figures/failure_cases/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_high_confidence_failures.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/figures/failure_cases/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_high_confidence_failures.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/figures/robustness/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_robustness_macro_f1_drop.png" beforeDir="false" afterPath="$PROJECT_DIR$/reports/figures/robustness/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_robustness_macro_f1_drop.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/reports/tables/robustness/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_robustness.csv" beforeDir="false" afterPath="$PROJECT_DIR$/reports/tables/robustness/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_robustness.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/terrasight/models/backbone_factory.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrasight/models/backbone_factory.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/terrasight/models/model_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrasight/models/model_utils.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/terrasight/reliability/robustness.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrasight/legacy/robustness.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/terrasight/reporting/figures.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrasight/reporting/figures.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/terrasight/reporting/generate_failure_cases.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_failure_cases.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/terrasight/reporting/generate_robustness_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_robustness_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/terrasight/reporting/statistical_analysis.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrasight/reporting/statistical_analysis.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/terrasight/training/trainer.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/terrasight/training/trainer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_reliability.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_reliability.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +76,7 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "Python.final_model_comparison.executor": "Run",
+    "Python.generate_class_level_analysis.executor": "Run",
     "Python.generate_comparison_figures.executor": "Run",
     "Python.generate_confusion_matrices.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -63,6 +90,43 @@
     "settings.editor.selected.configurable": "project.propVCSSupport.Mappings"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\DELL Precision 5550\Documents\GitHub\Terrasight-Eurosat-RGB-vs-Multispectral\src\terrasight\legacy" />
+      <recent name="C:\Users\DELL Precision 5550\Documents\GitHub\Terrasight-Eurosat-RGB-vs-Multispectral\src\terrasight\" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="generate_class_level_analysis" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="terrasight-eurosat-rgb-vs-multispectral" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/src/terrasight/reporting" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="DEBUG_JUST_MY_CODE" value="false" />
+      <option name="RUN_TOOL" value="" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/src/terrasight/reporting/generate_class_level_analysis.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.generate_class_level_analysis" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>

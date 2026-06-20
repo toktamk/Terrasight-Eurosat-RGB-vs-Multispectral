@@ -6,7 +6,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import pandas as pd
 from PIL import Image
-
+from terrasight.reliability.high_confidence_failures import extract_high_confidence_failures
 
 def get_project_root() -> Path:
     return Path(__file__).resolve().parents[3]
@@ -48,8 +48,15 @@ def load_image(path: str):
         print(f"Could not load image: {p} ({error})")
         return None
 
-def create_failure_grid(df: pd.DataFrame, output_path: Path, max_examples: int = 16) -> None:
-    failures = df[df["correct"] == 0].sort_values("confidence", ascending=False).head(max_examples)
+def create_failure_grid(df: pd.DataFrame, output_path: Path, max_examples: int = 16, min_confidence: float = 0.90,) -> None:
+    #failures = df[df["correct"] == 0].sort_values("confidence", ascending=False).head(max_examples)
+    # ensure compatibility with failure module
+    if "confidence_margin" not in df.columns:
+        df["confidence_margin"] = 0.0
+    failures = extract_high_confidence_failures(
+        prediction_df=df,
+        min_confidence=min_confidence,
+    ).head(max_examples)
 
     if failures.empty:
         print("No failures found.")
@@ -72,7 +79,7 @@ def create_failure_grid(df: pd.DataFrame, output_path: Path, max_examples: int =
             ax.imshow(img)
 
         ax.set_title(
-            f"True: {row['true_class']}\nPred: {row['predicted_class']}\nConf: {row['confidence']:.2f}",
+            f"True: {row['true_name']}\nPred: {row['pred_name']}\nConf: {row['confidence']:.2f}",
             fontsize=9,
         )
         ax.axis("off")
@@ -95,18 +102,37 @@ def main() -> None:
     output_dir.mkdir(parents=True, exist_ok=True)
 
     df = pd.read_csv(input_path)
+
+    df = df.rename(
+        columns={
+            "predicted_label": "pred_label",
+            "true_class": "true_name",
+            "predicted_class": "pred_name",
+        }
+    )
+
+    if "confidence_margin" not in df.columns:
+        df["confidence_margin"] = 0.0
+
+
+
     model_name = input_path.stem.replace("_probabilities", "")
 
-    output_path = output_dir / f"{model_name}_high_confidence_failures.png"
+    output_path = output_dir / f"{model_name}_high_confidence_failure_cases.png"
 
     create_failure_grid(df, output_path, max_examples=args.max_examples)
 
     failure_csv = output_dir / f"{model_name}_high_confidence_failures.csv"
-    df[df["correct"] == 0].sort_values("confidence", ascending=False).to_csv(
+    df[df["correct"] == 0].sort_values("confidence", ascending=False).to_csv(failure_csv,index=False )
+    failures = extract_high_confidence_failures(
+        prediction_df=df,
+        min_confidence=0.90,
+    )
+
+    failures.to_csv(
         failure_csv,
         index=False,
     )
-
     print(f"Saved: {output_path}")
     print(f"Saved: {failure_csv}")
 

@@ -8,28 +8,32 @@ from terrasight.models.model_utils import replace_classifier, replace_first_conv
 
 SUPPORTED_BACKBONES = {
     "resnet18",
-    "resnet34",
     "resnet50",
+    "efficientnet_b0",
+    "efficientnet_b2",
 }
 
 
-def _get_resnet_weights(name: str, pretrained: bool):
+def _get_pretrained_weights(name: str, pretrained: bool):
     if not pretrained:
         return None
 
     if name == "resnet18":
         return models.ResNet18_Weights.DEFAULT
 
-    if name == "resnet34":
-        return models.ResNet34_Weights.DEFAULT
-
     if name == "resnet50":
         return models.ResNet50_Weights.DEFAULT
+
+    if name == "efficientnet_b0":
+        return models.EfficientNet_B0_Weights.DEFAULT
+
+    if name == "efficientnet_b2":
+        return models.EfficientNet_B2_Weights.DEFAULT
 
     return None
 
 
-def build_resnet_backbone(
+def build_model_backbone(
     name: str,
     input_channels: int,
     num_classes: int,
@@ -45,12 +49,16 @@ def build_resnet_backbone(
     if name not in SUPPORTED_BACKBONES:
         raise ValueError(f"Unsupported backbone: {name}. Supported: {SUPPORTED_BACKBONES}")
 
-    weights = _get_resnet_weights(name=name, pretrained=pretrained)
+    weights = _get_pretrained_weights(name=name, pretrained=pretrained)
 
     if name == "resnet18":
         model = models.resnet18(weights=weights)
-    elif name == "resnet34":
-        model = models.resnet34(weights=weights)
+    elif name == "resnet50":
+        model = models.resnet50(weights=weights)
+    elif name == "efficientnet_b0":
+        model = models.efficientnet_b0(weights=weights)
+    elif name == "efficientnet_b2":
+        model = models.efficientnet_b2(weights=weights)
     else:
         model = models.resnet50(weights=weights)
 
@@ -74,12 +82,11 @@ def build_model(
 ) -> nn.Module:
     """Generic model factory."""
 
-    if name.startswith("resnet"):
-        return build_resnet_backbone(
+    return build_model_backbone(
             name=name,
             input_channels=input_channels,
             num_classes=num_classes,
             pretrained=pretrained,
-        )
+    )
 
     raise ValueError(f"Unsupported model name: {name}")

@@ -1,0 +1,6 @@
+analysis,model,metric,mean,ci_low,ci_high,b01_a_correct_b_wrong,b10_a_wrong_b_correct,p_value
+bootstrap_ci,model_a,accuracy,0.9497081481481482,0.9438888888888889,0.9553703703703704,,,
+bootstrap_ci,model_a,macro_f1,0.9482432751558022,0.9421091800455267,0.9540760342348412,,,
+bootstrap_ci,model_b,accuracy,0.9457207407407408,0.9392592592592592,0.9516666666666667,,,
+bootstrap_ci,model_b,macro_f1,0.9442212158171815,0.937552522060824,0.9501264324962966,,,
+mcnemar,model_a_vs_model_b,paired_correctness,0.9652406417112299,,,197.0,177.0,0.3258700242969796

@@ -1,0 +1,37 @@
+name,command,appears_in_readme,appears_in_reproducibility_report,appears_in_test_file,tested_by_reproducibility_tests,argparse_validated_by_test_suite,notes
+create split,python -m terrasight.data.split --config configs/v1_rgb_baseline.yaml,False,True,True,True,True,
+train rgb pretrained,python -m terrasight.pipelines.train_rgb --config configs/v1_rgb_baseline.yaml,False,True,True,True,True,
+train rgb scratch,python -m terrasight.pipelines.train_rgb --config configs/v1_rgb_scratch.yaml,False,True,True,True,True,
+train ms scratch,python -m terrasight.pipelines.train_multispectral --config configs/v1_multispectral_scratch.yaml,False,True,True,True,True,
+train ms adapted,python -m terrasight.pipelines.train_multispectral --config configs/v1_multispectral_pretrained_adapted.yaml,False,True,True,True,True,
+train v4 rgb,python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_rgb.yaml,False,True,True,True,True,
+train v4 rgb nir,python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_rgb_nir.yaml,False,True,True,True,True,
+train v4 rgb rededge nir,python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_rgb_rededge_nir.yaml,False,True,True,True,True,
+train v4 rgb rededge nir swir,python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_rgb_rededge_nir_swir.yaml,False,True,True,True,True,
+train v4 physical bands,python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_physical_bands.yaml,False,True,True,True,True,
+train v4 full13 no b10,python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_full13_no_b10.yaml,False,True,True,True,True,
+train v4 full13,python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_full13.yaml,False,True,True,True,True,
+multiseed best ms,python -m terrasight.experiments.run_multiseed --config configs/v4_ablation_rgb_rededge_nir_swir.yaml --seeds 42 43 44 --continue-on-error,False,True,True,True,True,
+confusion matrices,python -m terrasight.reporting.generate_confusion_matrices --results-root results --versions v1 v4 --output-figures reports/figures/confusion_matrices --output-tables reports/tables/predictions,False,True,True,True,True,
+comparison figures,python -m terrasight.reporting.generate_comparison_figures,False,True,True,True,True,
+comparison table,python -m terrasight.reporting.comparison --registry experiments/registry.csv --output reports/tables/comparison_table.csv,False,True,True,True,True,
+final model comparison,python -m terrasight.reporting.final_model_comparison,False,True,True,True,True,
+class level analysis,python -m terrasight.reporting.generate_class_level_analysis,False,True,True,True,True,
+per class f1,python -m terrasight.reporting.plot_per_class_f1,False,True,True,True,True,
+v4 conclusions,python -m terrasight.reporting.v4_scientific_conclusions,False,True,True,True,True,
+prediction probabilities,python -m terrasight.reporting.generate_prediction_probabilities --results-root results --versions v1 v4 --output-dir reports/tables/probabilities,False,True,True,True,True,
+reliability analysis,python -m terrasight.reporting.generate_reliability_analysis --input-dir reports/tables/probabilities --output-dir reports,False,True,True,True,True,
+robustness analysis,python -m terrasight.reporting.generate_robustness_analysis --run-dir results/v4/<BEST_RUN_DIR> --output-table-dir reports/tables/robustness --output-figure-dir reports/figures/robustness,False,True,True,True,True,PLACEHOLDER command requires project-specific run/probability path
+band occlusion,python -m terrasight.reporting.generate_band_occlusion --run-dir results/v4/<BEST_RUN_DIR> --output-dir reports/tables/band_occlusion,False,True,True,True,True,PLACEHOLDER command requires project-specific run/probability path
+class-specific importance,python -m terrasight.reporting.generate_class_specific_importance --input reports/tables/band_occlusion/<EXPERIMENT_ID>_band_occlusion_details.csv --output-dir reports/tables/class_specific_importance --top-k 3,False,True,True,True,True,PLACEHOLDER command requires project-specific run/probability path
+failure cases,python -m terrasight.reporting.generate_failure_cases --probabilities reports/tables/probabilities/<EXPERIMENT_ID>_probabilities.csv --output-dir reports/figures/failure_cases --max-examples 16,False,True,True,True,True,PLACEHOLDER command requires project-specific run/probability path
+gradcam correct,python -m terrasight.reporting.generate_gradcam_examples --run-dir results/v4/<BEST_RUN_DIR> --selection-mode correct_high_confidence --target-layer layer3 --num-examples 8,False,True,True,True,True,PLACEHOLDER command requires project-specific run/probability path
+gradcam failure,python -m terrasight.reporting.generate_gradcam_examples --run-dir results/v4/<BEST_RUN_DIR> --selection-mode high_confidence_failure --target-layer layer3 --num-examples 8,False,True,True,True,True,PLACEHOLDER command requires project-specific run/probability path
+feature space,python -m terrasight.reporting.generate_feature_space_plots --run-dir results/v4/<BEST_RUN_DIR> --method both --max-samples 3000,False,True,True,True,True,PLACEHOLDER command requires project-specific run/probability path
+spectral signatures,python -m terrasight.explainability.spectral_signatures --data-dir data/raw/multispectral --output-dir reports/figures/spectral_signatures,False,True,True,True,True,
+architecture sensitivity,python -m terrasight.reporting.generate_architecture_sensitivity,False,True,True,True,True,
+model profile,python -m terrasight.reporting.generate_model_profile,False,True,True,True,True,
+industrial discussion,python -m terrasight.reporting.generate_industrial_discussion,False,True,True,True,True,
+statistical validation,"python -m terrasight.reporting.statistical_analysis --model-a reports/tables/probabilities/v4_ablation_rgb_resnet18_pretrained_adapted_seed42_probabilities.csv --model-b reports/tables/probabilities/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_probabilities.csv --model-a-name ""RGB ResNet18"" --model-b-name ""RGB+RedEdge+NIR+SWIR ResNet18"" --output reports/tables/statistical_tests/statistical_analysis.csv --summary reports/tables/statistical_tests/statistical_summary.md --bootstrap 1000 --seed 42",False,True,True,True,True,
+spectral separability analysis,python -m terrasight.reporting.generate_spectral_separability --data-dir <MULTISPECTRAL_DATASET_DIR> --tables-dir reports/tables/spectral_analysis --figures-dir reports/figures/spectral_analysis,True,True,True,True,True,PLACEHOLDER command requires project-specific run/probability path
+report asset check,python -m terrasight.reporting.check_report_assets --show-discovered --strict,False,True,True,True,True,

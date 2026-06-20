@@ -15,6 +15,59 @@ from sklearn.metrics import (
 
 from terrasight.data.band_registry import EUROSAT_CLASSES
 
+def save_metric_bar_chart(
+    table: pd.DataFrame,
+    metric: str,
+    output_path: str | Path,
+) -> None:
+    """Save a bar chart for a selected metric from a comparison table."""
+    if "experiment" not in table.columns:
+        raise ValueError("Input table must contain an 'experiment' column.")
+
+    if metric not in table.columns:
+        raise ValueError(f"Metric column not found: {metric}")
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.bar(table["experiment"].astype(str), table[metric].astype(float))
+    ax.set_xlabel("Experiment")
+    ax.set_ylabel(metric)
+    ax.set_title(f"{metric} Comparison")
+    ax.tick_params(axis="x", rotation=45)
+
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=300)
+    plt.close(fig)
+
+def save_training_curve(
+    history: list[dict[str, float]],
+    output_path: str | Path,
+    metric: str = "macro_f1",
+) -> None:
+    """Save a training curve for a selected metric from epoch history."""
+    if not history:
+        raise ValueError("History is empty.")
+
+    output_path = Path(output_path)
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+
+    epochs = [row.get("epoch", idx + 1) for idx, row in enumerate(history)]
+
+    if metric not in history[0]:
+        raise ValueError(f"Metric not found in history: {metric}")
+
+    values = [row[metric] for row in history]
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+    ax.plot(epochs, values, marker="o")
+    ax.set_xlabel("Epoch")
+    ax.set_ylabel(metric)
+    ax.set_title(f"Training Curve: {metric}")
+    fig.tight_layout()
+    fig.savefig(output_path, dpi=300)
+    plt.close(fig)
 
 def load_json(path: str | Path) -> Any:
     """Load a JSON file."""

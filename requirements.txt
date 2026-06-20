@@ -22,3 +22,5 @@ matplotlib==3.11.0
 # Utilities
 tqdm  # Add this
 tabulate==0.10.0
+umap-learn
+rasterio

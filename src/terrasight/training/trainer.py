@@ -102,12 +102,6 @@ def save_checkpoint(
     torch.save(model.state_dict(), checkpoint_path)
 
 
-from __future__ import annotations
-
-import json
-from pathlib import Path
-from typing import Any
-
 
 def save_metrics(
     metrics: dict[str, Any],
@@ -221,6 +215,14 @@ def train_from_config(config_path: str | Path) -> Path:
     )
 
     epochs = int(config["training"]["epochs"])
+    early_cfg = config["training"].get("early_stopping", {})
+    early_enabled = bool(early_cfg.get("enabled", False))
+    monitor = early_cfg.get("monitor", "macro_f1")
+    patience = int(early_cfg.get("patience", 7))
+    min_delta = float(early_cfg.get("min_delta", 0.0))
+
+    best_score = -float("inf")
+    epochs_without_improvement = 0
     best_macro_f1 = -1.0
     best_metrics: dict[str, Any] = {}
 
@@ -261,11 +263,25 @@ def train_from_config(config_path: str | Path) -> Path:
             else:
                 scheduler.step()
 
-        if metrics["macro_f1"] > best_macro_f1:
-            best_macro_f1 = metrics["macro_f1"]
-            best_metrics = metrics
-            save_checkpoint(model, run_dir, "best_model.pt")
+        current_score = float(metrics[monitor])
 
+        if current_score > best_score + min_delta:
+            best_score = current_score
+            best_macro_f1 = float(metrics["macro_f1"])
+            best_metrics = metrics
+            epochs_without_improvement = 0
+            save_checkpoint(model, run_dir, "best_model.pt")
+            print(f"New best {monitor}: {current_score:.4f}")
+        else:
+            epochs_without_improvement += 1
+            print(f"No improvement in {monitor} for {epochs_without_improvement}/{patience} epochs.")
+
+        if early_enabled and epochs_without_improvement >= patience:
+            print(
+                f"\nEarly stopping triggered at epoch {epoch}. "
+                f"No improvement in {monitor} for {patience} consecutive epochs."
+            )
+            break
     save_metrics(best_metrics, run_dir)
     from terrasight.experiments.experiment_tracker import register_experiment
 

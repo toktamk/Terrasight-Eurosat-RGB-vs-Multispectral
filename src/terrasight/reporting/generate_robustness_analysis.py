@@ -19,70 +19,8 @@ from terrasight.reporting.generate_confusion_matrices import (
     load_checkpoint_into_model,
 )
 from terrasight.utils.config import load_config
+from terrasight.reliability.robustness_testing import run_robustness_suite
 
-
-def add_gaussian_noise(images: torch.Tensor, std: float) -> torch.Tensor:
-    return torch.clamp(images + torch.randn_like(images) * std, -5.0, 5.0)
-
-
-def apply_brightness_shift(images: torch.Tensor, shift: float) -> torch.Tensor:
-    return images + shift
-
-
-def dropout_band(images: torch.Tensor, band_index: int) -> torch.Tensor:
-    perturbed = images.clone()
-    perturbed[:, band_index, :, :] = 0.0
-    return perturbed
-
-
-@torch.no_grad()
-def evaluate_model(
-    model: torch.nn.Module,
-    dataloader: DataLoader,
-    device: torch.device,
-    perturbation: str,
-    band_index: int | None = None,
-    noise_std: float = 0.05,
-    brightness_shift: float = 0.10,
-) -> dict[str, float]:
-    model.eval()
-
-    y_true: list[int] = []
-    y_pred: list[int] = []
-
-    for batch in dataloader:
-        if len(batch) == 3:
-            images, labels, _metadata = batch
-        else:
-            images, labels = batch
-
-        images = images.to(device)
-
-        if perturbation == "clean":
-            pass
-        elif perturbation == "gaussian_noise":
-            images = add_gaussian_noise(images, std=noise_std)
-        elif perturbation == "brightness_plus":
-            images = apply_brightness_shift(images, shift=brightness_shift)
-        elif perturbation == "brightness_minus":
-            images = apply_brightness_shift(images, shift=-brightness_shift)
-        elif perturbation == "band_dropout":
-            if band_index is None:
-                raise ValueError("band_index is required for band_dropout.")
-            images = dropout_band(images, band_index=band_index)
-        else:
-            raise ValueError(f"Unknown perturbation: {perturbation}")
-
-        logits = model(images)
-        preds = torch.argmax(logits, dim=1).detach().cpu().tolist()
-
-        y_true.extend([int(x) for x in labels])
-        y_pred.extend(preds)
-
-    return {
-        "accuracy": float(accuracy_score(y_true, y_pred)),
-        "macro_f1": float(f1_score(y_true, y_pred, average="macro", zero_division=0)),
-    }
 
 
 def plot_robustness(df: pd.DataFrame, output_path: Path, title: str) -> None:
@@ -95,7 +33,7 @@ def plot_robustness(df: pd.DataFrame, output_path: Path, title: str) -> None:
         lambda row: row["band"] if row["perturbation"] == "band_dropout" else row["perturbation"],
         axis=1,
     )
-
+    plot_df["label"] = plot_df["perturbation"].str.replace("dropout_", "", regex=False)
     plot_df = plot_df.sort_values("macro_f1_drop", ascending=True)
 
     plt.figure(figsize=(10, max(5, 0.35 * len(plot_df))))
@@ -149,71 +87,18 @@ def process_run(
     model = load_checkpoint_into_model(model, checkpoint_path, device)
     model = model.to(device)
 
-    rows: list[dict[str, Any]] = []
-
-    clean_metrics = evaluate_model(
-        model=model,
-        dataloader=dataloader,
-        device=device,
-        perturbation="clean",
-    )
-
-    rows.append(
-        {
-            "experiment_id": experiment_id,
-            "perturbation": "clean",
-            "band": "",
-            "accuracy": clean_metrics["accuracy"],
-            "macro_f1": clean_metrics["macro_f1"],
-            "accuracy_drop": 0.0,
-            "macro_f1_drop": 0.0,
-        }
-    )
-
-    for perturbation in ["gaussian_noise", "brightness_plus", "brightness_minus"]:
-        metrics = evaluate_model(
-            model=model,
-            dataloader=dataloader,
-            device=device,
-            perturbation=perturbation,
-        )
-
-        rows.append(
-            {
-                "experiment_id": experiment_id,
-                "perturbation": perturbation,
-                "band": "",
-                "accuracy": metrics["accuracy"],
-                "macro_f1": metrics["macro_f1"],
-                "accuracy_drop": clean_metrics["accuracy"] - metrics["accuracy"],
-                "macro_f1_drop": clean_metrics["macro_f1"] - metrics["macro_f1"],
-            }
-        )
-
     selected_bands = config["data"].get("bands", [])
 
-    for band_index, band_name in enumerate(selected_bands):
-        metrics = evaluate_model(
-            model=model,
-            dataloader=dataloader,
-            device=device,
-            perturbation="band_dropout",
-            band_index=band_index,
-        )
-
-        rows.append(
-            {
-                "experiment_id": experiment_id,
-                "perturbation": "band_dropout",
-                "band": band_name,
-                "accuracy": metrics["accuracy"],
-                "macro_f1": metrics["macro_f1"],
-                "accuracy_drop": clean_metrics["accuracy"] - metrics["accuracy"],
-                "macro_f1_drop": clean_metrics["macro_f1"] - metrics["macro_f1"],
-            }
-        )
-
-    df = pd.DataFrame(rows)
+    df = run_robustness_suite(
+        model=model,
+        dataloader=dataloader,
+        output_dir=output_table_dir / experiment_id,
+        n_channels=len(selected_bands) if selected_bands else None,
+        band_names=selected_bands if selected_bands else None,
+        device=device,
+    )
+    table_path = output_table_dir / f"{experiment_id}_robustness.csv"
+    df.to_csv(table_path, index=False)
 
     output_table_dir.mkdir(parents=True, exist_ok=True)
     output_figure_dir.mkdir(parents=True, exist_ok=True)
