@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6f775f8-462f-4a6e-89e6-cc5c10724014" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/terrasight/reporting/generate_gradcam_summary.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/Reliability_report.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/Reliability_report.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/explaiability_failure_analysis.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/explaiability_failure_analysis.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/reproducibility_checklist.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/reproducibility_checklist.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/reproducibility_report.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/reproducibility_report.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_reproducibility_commands.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_reproducibility_commands.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

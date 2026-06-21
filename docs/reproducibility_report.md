@@ -519,6 +519,10 @@ python -m terrasight.reporting.generate_gradcam_examples --run-dir results/v4/<B
 ```bash
 python -m terrasight.reporting.generate_gradcam_examples --run-dir results/v4/<BEST_RUN_DIR> --selection-mode high_confidence_failure --target-layer layer3 --num-examples 8
 ```
+```bash
+python -m terrasight.reporting.generate_gradcam_summary --input-dir reports/figures/gradcam --output reports/figures/gradcam/gradcam_summary.png --max-images 6 --columns 1
+```
+
 ## Feature Space Analysis
 
 ```bash
