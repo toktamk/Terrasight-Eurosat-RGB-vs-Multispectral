@@ -11,8 +11,6 @@ To evaluate prediction reliability, TerraSight incorporates confidence-based ana
 
 These analyses complement conventional classification metrics by assessing whether predicted probabilities correspond to observed accuracy.
 
----
-
 ### Reliability Analysis
 
 Reliability diagrams compare predicted confidence against empirical accuracy across confidence bins.
@@ -29,8 +27,6 @@ Several consistent patterns emerged across all evaluated models:
 2. Transfer learning improves confidence calibration compared with training from scratch.
 3. Multispectral information improves both classification performance and confidence quality when informative spectral bands are selected.
 4. Calibration quality varies substantially across spectral configurations despite similar classification performance.
-
----
 
 ### Expected Calibration Error (ECE)
 
@@ -70,8 +66,6 @@ ECE = 0.0039
 
 This indicates excellent agreement between predicted confidence and observed accuracy.
 
----
-
 ### Reliability Diagrams
 
 | RGB Baseline | Multispectral Adapted |
@@ -79,13 +73,11 @@ This indicates excellent agreement between predicted confidence and observed acc
 | ![](reports/figures/reliability/v1_rgb_resnet18_seed42_reliability_diagram.png) | ![](reports/figures/reliability/v1_multispectral_resnet18_adapted_seed42_reliability_diagram.png) |
 | **(a)** RGB Pretrained | **(b)** Multispectral Adapted |
 
-**Figure X.** Reliability diagrams for the primary V1 models. The diagonal line represents perfect calibration.
+**Figure 1.** Reliability diagrams for the primary V1 models. The diagonal line represents perfect calibration.
 
 The RGB pretrained model exhibits the strongest calibration among the V1 experiments, with its reliability curve closely following the ideal diagonal. The adapted multispectral model also demonstrates good calibration behaviour, although slight deviations appear in several confidence bins.
 
 Both pretrained models are substantially better calibrated than their scratch-trained counterparts, reinforcing the value of transfer learning for confidence estimation as well as classification accuracy.
-
----
 
 ### Calibration Across Spectral Configurations
 
@@ -115,8 +107,6 @@ These findings support the broader conclusion of this project:
 
 > Spectral selection is more important than spectral quantity.
 
----
-
 ### Prediction Confidence Analysis
 
 Prediction confidence histograms were generated using maximum softmax probabilities.
@@ -131,7 +121,7 @@ Prediction confidence histograms were generated using maximum softmax probabilit
 | ![](reports/figures/reliability/v4_ablation_full13_resnet18_pretrained_adapted_seed42_confidence_histogram.png) | ![](reports/figures/reliability/v4_ablation_rgb_rededge_nir_resnet18_pretrained_adapted_seed42_confidence_histogram.png) |
 | **(c)** Full13 | **(d)** RGB + RedEdge + NIR |
 
-**Figure X.** Prediction confidence distributions for representative RGB and multispectral models.
+**Figure 2.** Prediction confidence distributions for representative RGB and multispectral models.
 
 #### Interpretation
 
@@ -143,8 +133,6 @@ Several consistent trends are visible:
 4. Carefully selected spectral subsets achieve confidence behaviour similar to larger multispectral inputs while requiring fewer spectral channels.
 
 These results indicate that useful multispectral information can improve certainty without requiring the complete Sentinel-2 spectral stack.
-
----
 
 ### High-Confidence Failure Analysis
 
@@ -168,8 +156,6 @@ These failures demonstrate that:
 - Calibration analysis is essential even for highly accurate models.
 
 Most high-confidence errors arise from intrinsic class overlap rather than arbitrary prediction failures.
-
----
 
 ### Reliability Conclusions
 

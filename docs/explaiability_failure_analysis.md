@@ -9,8 +9,6 @@ Beyond aggregate performance metrics, understanding *why* a model succeeds or fa
 
 These analyses provide insight into residual classification errors, model attention behaviour, and the role of spectral information in difficult classification scenarios.
 
----
-
 ### High-Confidence Failure Analysis
 
 Although the best-performing model achieved strong overall performance (95.67% Accuracy, 95.56% Macro-F1), a small number of errors were produced with extremely high confidence.
@@ -19,7 +17,7 @@ Although the best-performing model achieved strong overall performance (95.67% A
 <img src="reports/figures/failure_cases/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_high_confidence_failures.png" width="100%">
 </p>
 
-**Figure X.** High-confidence misclassifications from the best-performing multispectral model (RGB + RedEdge + NIR + SWIR).
+**Figure 1.** High-confidence misclassifications from the best-performing multispectral model (RGB + RedEdge + NIR + SWIR).
 
 Each example displays the true class, predicted class, and confidence score. Many incorrect predictions occur with confidence values exceeding 0.98, indicating that the model can be highly certain even when incorrect.
 
@@ -69,8 +67,6 @@ Importantly, the model rarely confuses unrelated classes. Most mistakes occur be
 
 This behaviour suggests that the learned feature representations are meaningful and that the remaining errors primarily reflect intrinsic ambiguity within the EuroSAT dataset rather than deficiencies in model training.
 
----
-
 ### Confusion-Pair Analysis
 
 To better understand residual errors, Grad-CAM was applied to representative confusion pairs.
@@ -91,8 +87,6 @@ PermanentCrop ↔ HerbaceousVegetation
 
 This finding is consistent with the confusion-matrix analysis and supports the conclusion that vegetation-related classes remain the primary classification challenge.
 
----
-
 ### Grad-CAM Explainability
 
 Gradient-weighted Class Activation Mapping (Grad-CAM) was used to investigate which image regions contributed most strongly to model predictions.
@@ -109,7 +103,7 @@ Representative correctly classified examples are shown below.
 |---------------|-------------|--------|
 | ![](reports/figures/gradcam/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_layer3_class_examples_00_PermanentCrop_to_PermanentCrop.png) | ![](reports/figures/gradcam/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_layer3_class_examples_00_Residential_to_Residential.png) | ![](reports/figures/gradcam/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_layer3_class_examples_05_River_to_River.png) |
 
-**Figure X.** Representative Grad-CAM explanations from the best-performing multispectral model.
+**Figure 2.** Representative Grad-CAM explanations from the best-performing multispectral model.
 
 #### Interpretation
 
@@ -120,8 +114,6 @@ The visualizations indicate that the model attends to semantically meaningful la
 - **River:** elongated water channels and surrounding hydrological structures.
 
 These attention patterns provide evidence that predictions are based on relevant land-cover characteristics rather than spurious image artifacts.
-
----
 
 ### Failure-Case Grad-CAM Analysis
 
@@ -145,13 +137,11 @@ Representative examples are shown below.
 |---|---|
 | ![](reports/figures/gradcam/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_layer3_high_confidence_failure_02_HerbaceousVegetation_to_PermanentCrop.png) | ![](reports/figures/gradcam/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed42_layer3_high_confidence_failure_03_PermanentCrop_to_AnnualCrop.png) |
 
-**Figure X.** Representative high-confidence failures and corresponding Grad-CAM explanations.
+**Figure 3.** Representative high-confidence failures and corresponding Grad-CAM explanations.
 
 The activation maps reveal that the model generally attends to meaningful structures even when predictions are incorrect. Most failures arise because multiple classes share similar spectral and spatial characteristics rather than because attention is focused on irrelevant image regions.
 
 This behaviour increases confidence that the model has learned useful land-cover representations and that residual errors primarily reflect dataset complexity.
-
----
 
 ### Explainability Conclusions
 

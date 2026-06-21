@@ -49,8 +49,6 @@ pip install -r requirements.txt
 pytest tests/test_imports.py
 ```
 
----
-
 ## Dataset Preparation
 
 ### EuroSAT RGB Dataset
@@ -78,8 +76,6 @@ data/raw/multispectral/
 ```bash
 python -m terrasight.data.check_dataset_structure
 ```
-
----
 
 ## Training Experiments
 
@@ -113,8 +109,6 @@ python -m terrasight.training.train --config configs/v4_ablation_rgb_rededge_nir
 python -m terrasight.training.train --config configs/v4_ablation_rgb_rededge_nir_swir_resnet18_pretrained_adapted_seed44.yaml
 ```
 
----
-
 ## Evaluation
 
 ### Evaluate Trained Models
@@ -132,8 +126,6 @@ python -m terrasight.evaluation.evaluate --run-dir <RUN_DIR>
 ```bash
 python -m terrasight.reporting.update_registry --runs-dir experiments
 ```
-
----
 
 ## Reporting
 
@@ -193,8 +185,6 @@ python -m terrasight.reporting.statistical_analysis --model-a reports/tables/pro
 python -m terrasight.reporting.generate_spectral_separability --data-dir <MULTISPECTRAL_DATASET_DIR> --tables-dir reports/tables/spectral_analysis --figures-dir reports/figures/spectral_analysis
 ```
 
----
-
 ## Automated Validation
 
 ### Unit Tests
@@ -221,8 +211,6 @@ pytest tests/test_reproducibility_commands.py
 python -m terrasight.reporting.check_report_assets
 ```
 
----
-
 ## Expected Outputs
 
 Successful reproduction should generate:
@@ -243,8 +231,6 @@ including:
 * robustness reports
 * statistical validation reports
 * spectral separability analyses
-
----
 
 ## Reproducibility Status
 

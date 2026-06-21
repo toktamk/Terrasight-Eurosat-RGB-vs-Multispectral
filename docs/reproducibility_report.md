@@ -49,15 +49,9 @@ requirements.txt
 
 # Repository Execution Model
 
-
-
 The project is organized as a Python package.
 
-
-
 Core source code is located in:
-
-
 
 ```text
 
@@ -65,129 +59,60 @@ src/terrasight/
 
 ```
 
-
-
 Executable workflows are exposed through Python module entry points:
 
-
-
 ```bash
-
 python -m terrasight.<module>
-
 ```
-
-
 
 Main executable groups:
 
-
-
 ```text
-
 terrasight.data
-
 terrasight.pipelines
-
 terrasight.experiments
-
 terrasight.reporting
-
 terrasight.explainability
-
 ```
-
-
 
 Core library modules (`data`, `models`, `training`, `evaluation`,
-
 `reliability`, `explainability`) are generally imported by executable
-
 modules rather than executed directly.
 
-
-
----
-
-
-
 # Environment Setup
-
-
-
 ## Create Virtual Environment
-
-
-
 ### Linux / macOS
 
-
-
 ```bash
-
 python -m venv .venv
-
 source .venv/bin/activate
-
 ```
-
-
 
 ### Windows PowerShell
 
-
-
 ```powershell
-
 python -m venv .venv
-
 .venv\Scripts\Activate.ps1
-
 ```
-
-
 
 ## Install Dependencies
 
-
-
 ```bash
-
 pip install -e .
-
 pip install -r requirements.txt
-
 ```
-
-
 
 ## Verify Installation
 
-
-
 ```bash
-
 python -c "import terrasight; print('TerraSight import successful')"
-
 ```
-
-
 
 ## Run Unit Tests
 
-
-
 ```bash
-
 pytest
-
 ```
-
-
-
----
-
-
 
 # Dataset Reproducibility
 ## Dataset
@@ -201,64 +126,38 @@ The experiments use the EuroSAT Sentinel-2 dataset.
 | RGB Dataset | Yes |
 | Multispectral Dataset | Yes |
 
-
 ## Dataset Layout
-
 ### RGB Dataset
 
 ```text
-
 data/raw/rgb/
-
 ├── AnnualCrop/
-
 ├── Forest/
-
 ├── HerbaceousVegetation/
-
 ├── Highway/
-
 ├── Industrial/
-
 ├── Pasture/
-
 ├── PermanentCrop/
-
 ├── Residential/
-
 ├── River/
-
 └── SeaLake/
-
 ```
 
 ### Multispectral Dataset
 Raw data must be placed in:
 
 ```text
-
 data/raw/multispectral/
-
 ├── AnnualCrop/
-
 ├── Forest/
-
 ├── HerbaceousVegetation/
-
 ├── Highway/
-
 ├── Industrial/
-
 ├── Pasture/
-
 ├── PermanentCrop/
-
 ├── Residential/
-
 ├── River/
-
 └── SeaLake/
-
 ```
 
 according to the repository structure described in the README.
@@ -274,29 +173,16 @@ The split is generated once and reused by all experiments.
 
 Generate the fixed stratified split:
 
-
-
 ```bash
-
 python -m terrasight.data.split --config configs/v1_rgb_baseline.yaml
-
 ```
-
-
 
 Expected outputs:
 
-
-
 ```text
-
 data/splits/train.csv
-
 data/splits/test.csv
-
 ```
-
-
 
 The split files are reused by RGB and multispectral experiments to ensure fair comparison.
 This prevents variation caused by repeated random splitting.
@@ -389,58 +275,31 @@ The primary comparison consists of four controlled experiments:
 This design isolates the effects of transfer learning and multispectral information.
 
 ## V1 Baseline Experiments
-
-
-
 ### RGB Pretrained
 
-
-
 ```bash
-
 python -m terrasight.pipelines.train_rgb --config configs/v1_rgb_baseline.yaml
-
 ```
-
-
 
 ### RGB Scratch
 
-
-
 ```bash
-
 python -m terrasight.pipelines.train_rgb --config configs/v1_rgb_scratch.yaml
-
 ```
-
-
 
 ### Multispectral Scratch
 
-
-
 ```bash
-
 python -m terrasight.pipelines.train_multispectral --config configs/v1_multispectral_scratch.yaml
-
 ```
-
-
 
 ### Adapted Pretrained Multispectral
 
-
-
 ```bash
-
 python -m terrasight.pipelines.train_multispectral --config configs/v1_multispectral_pretrained_adapted.yaml
-
 ```
 
-
 ## V4 Band-Ablation Experiments
-
 The spectral-ablation study evaluates:
 
 | Configuration |
@@ -455,121 +314,63 @@ The spectral-ablation study evaluates:
 
 This design isolates the contribution of individual spectral groups.
 
-
 ### RGB Only
 
-
-
 ```bash
-
 python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_rgb.yaml
-
 ```
-
-
 
 ### RGB + NIR
 
-
-
 ```bash
-
 python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_rgb_nir.yaml
-
 ```
-
-
 
 ### RGB + RedEdge + NIR
 
-
-
 ```bash
-
 python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_rgb_rededge_nir.yaml
-
 ```
-
-
 
 ### RGB + RedEdge + NIR + SWIR
 
-
-
 ```bash
-
 python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_rgb_rededge_nir_swir.yaml
-
 ```
-
-
 
 ### Physical-Band Groups
 
-
-
 ```bash
-
 python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_physical_bands.yaml
-
 ```
-
-
 
 ### Full 13 Bands (without B10)
 
-
-
 ```bash
-
 python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_full13_no_b10.yaml
-
 ```
-
-
 
 ### Full 13 Bands
 
-
-
 ```bash
-
 python -m terrasight.pipelines.train_multispectral --config configs/v4_ablation_full13.yaml
-
 ```
-
-
 
 Expected outputs:
 
-
-
 ```text
-
 results/<experiment_id>/
-
 ├── config.yaml
-
 ├── history.json
-
 ├── metrics.json
-
 └── best_model.pt
-
 ```
-
-
 
 Experiment registry:
 
-
-
 ```text
-
 experiments/registry.csv
-
 ```
-
 
 # Minimal Reproduction Workflow
 - Generate Dataset Split
@@ -598,7 +399,6 @@ classification_report.json
 ## Model Checkpoints
 
 ```text
-
 best_model.pt
 last_model.pt
 ```
@@ -614,37 +414,18 @@ robustness/
 ```
 # Multi-Seed Reproduction
 
-
-
 ```bash
-
 python -m terrasight.experiments.run_multiseed --config configs/v4_ablation_rgb_rededge_nir_swir.yaml --seeds 42 43 44 --continue-on-error
-
 ```
-
 
 Expected outputs:
 
-
-
 ```text
-
 experiments/generated_multiseed/
-
 results/multiseed/
-
 reports/tables/multiseed_summary.csv
-
 reports/tables/multiseed_summary.json
-
 ```
-
-
-
----
-
-
-
 
 ## Reports
 
@@ -654,7 +435,6 @@ reports/tables/
 ```
 These outputs are stored within the corresponding experiment directory.
 
-
 ## Predictions and Confusion Matrices
 
 ```bash
@@ -662,23 +442,15 @@ python -m terrasight.reporting.generate_confusion_matrices --results-root result
 ```
 Expected outputs:
 
-
 ```text
-
 reports/tables/predictions/
-
 reports/figures/confusion_matrices/
-
 ```
 
 ## Model Comparison
 
-
-
 ```bash
-
 python -m terrasight.reporting.generate_comparison_figures
-
 ```
 
 ```bash
@@ -690,10 +462,9 @@ python -m terrasight.reporting.comparison --registry experiments/registry.csv --
 ```
 
 ```bash
-
 python -m terrasight.reporting.final_model_comparison
-
 ```
+
 ```bash
 python -m terrasight.reporting.generate_class_level_analysis
 ```
@@ -704,77 +475,44 @@ Expected outputs:
 ```
 
 ```text
-
 reports/figures/v1_model_comparison.png
-
 reports/figures/v4_band_ablation_comparison.png
-
 reports/tables/final_model_comparison.csv
-
 ```
 
----
 # Failure Cases
 ```bash
 python -m terrasight.reporting.generate_failure_cases --probabilities reports/tables/probabilities/<EXPERIMENT_ID>_probabilities.csv --output-dir reports/figures/failure_cases --max-examples 16
 ```
 # Reliability Analysis
 
-
 ```bash
-
 python -m terrasight.reporting.generate_prediction_probabilities --results-root results --versions v1 v4 --output-dir reports/tables/probabilities
-
 ```
 
 ```bash
-
 python -m terrasight.reporting.generate_reliability_analysis --input-dir reports/tables/probabilities --output-dir reports
-
 ```
-
-
 
 Expected outputs:
 
-
-
 ```text
-
 reports/tables/probabilities/
-
 reports/tables/reliability/
-
 reports/figures/reliability/
-
 ```
-
-
-
----
 
 # Explainability Analysis
 
-
-
 ## Band Occlusion
 
-
-
 ```bash
-
 python -m terrasight.reporting.generate_band_occlusion --run-dir results/v4/<BEST_RUN_DIR> --output-dir reports/tables/band_occlusion
-
 ```
-
-
 
 ## Grad-CAM
 
-
-
 ```bash
-
 python -m terrasight.reporting.generate_gradcam_examples --run-dir results/v4/<BEST_RUN_DIR> --selection-mode correct_high_confidence --target-layer layer3 --num-examples 8
 ```
 
@@ -790,21 +528,14 @@ python -m terrasight.reporting.generate_feature_space_plots --run-dir results/v4
 ## Spectral Signatures
 
 ```bash
-
 python -m terrasight.explainability.spectral_signatures --data-dir data/raw/multispectral --output-dir reports/figures/spectral_signatures
-
 ```
 
 Expected outputs:
-
 ```text
-
 reports/figures/spectral_signatures/
-
 reports/figures/gradcam/
-
 reports/tables/band_occlusion/
-
 ```
 
 ## Architecture Sensitivity
@@ -812,8 +543,6 @@ reports/tables/band_occlusion/
 ```bash
 python -m terrasight.reporting.generate_architecture_sensitivity
 ```
-
----
 
 ## Model Profile
 
@@ -831,17 +560,9 @@ python -m terrasight.reporting.generate_spectral_separability --data-dir <MULTIS
 ```
 # Final Validation
 
-
-
 ```bash
-
 python -m terrasight.reporting.check_report_assets --show-discovered --strict
-
 ```
-
-
-
----
 
 # Reproducibility Verification Checklist
 The following items should be verified when reproducing results:
@@ -857,7 +578,6 @@ The following items should be verified when reproducing results:
 | Checkpoints saved | Yes |
 
 Minor numerical differences may occur across operating systems, hardware platforms, and PyTorch versions due to floating-point implementation differences.
-
 # Robustness and Stability
 To assess training stability, the best-performing spectral configuration was evaluated using multiple random seeds.
 
@@ -930,35 +650,19 @@ The repository is designed to enable independent researchers and reviewers to re
 
 # Reproducibility Conclusion
 
-
-
 The TerraSight project is reproducible at the code, experiment, and reporting levels.
-
-
 
 The workflow starts from dataset preparation and split generation, proceeds through configuration-driven training, and concludes with automated generation of metrics, figures, tables, robustness analyses, reliability analyses, explainability outputs, and scientific reporting artifacts.
 
-
-
 Key reproducibility mechanisms include:
 
-
-
 - Fixed train/test splits
-
 - YAML configuration files
-
 - Timestamped experiment directories
-
 - Saved checkpoints
-
 - Saved metrics
-
 - Experiment registry tracking
-
 - Automated reporting pipelines
-
-
 
 Together, these components enable independent verification of the reported RGB-versus-multispectral experimental results.
 
@@ -967,7 +671,6 @@ Together, these components enable independent verification of the reported RGB-v
 The full reproducibility verification was executed before submission.
 
 Summary:
-
 - Unit tests: 211 passed
 - Reproducibility command tests: 170 passed
 - Report asset validation: READY

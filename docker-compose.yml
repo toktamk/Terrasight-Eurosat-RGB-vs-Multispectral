@@ -1,0 +1,22 @@
+services:
+  terrasight:
+    build: .
+    image: terrasight:latest
+    working_dir: /app
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+      - ./results:/app/results
+      - ./experiments:/app/experiments
+    command: python -c "import terrasight; print('Installation successful')"
+
+  asset-check:
+    build: .
+    image: terrasight:latest
+    working_dir: /app
+    volumes:
+      - ./data:/app/data
+      - ./reports:/app/reports
+      - ./results:/app/results
+      - ./experiments:/app/experiments
+    command: python -m terrasight.reporting.check_report_assets --show-discovered --strict

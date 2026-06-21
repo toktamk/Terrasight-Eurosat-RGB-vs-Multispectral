@@ -1013,7 +1013,6 @@ Importantly, the results do **not** support the claim that simply increasing the
 
 These results strengthen the reliability of the reported conclusions by demonstrating that the observed improvements are unlikely to be explained by random variation alone.
 
----
 ### Reproducibility and Generated Outputs
 
 Statistical results can be reproduced using:
@@ -1067,8 +1066,6 @@ The RGB + RedEdge + NIR + SWIR model achieved both:
 - Best confidence calibration.
 
 This suggests that the model is not only accurate but also trustworthy in terms of confidence estimation.
-
----
 
 ## Prediction Confidence Analysis
 
@@ -1163,8 +1160,6 @@ However, the central scientific conclusions of this project remain unchanged:
 
 This section investigates model behaviour beyond classification accuracy, focusing on explainability, robustness, reproducibility, and practical deployment considerations.
 
----
-
 ## Explainability Analysis
 
 Understanding why a model makes a prediction is particularly important in remote-sensing applications where decisions may influence environmental monitoring, land-use assessment, agricultural planning, and policy-making.
@@ -1199,7 +1194,6 @@ Grad-CAM visualizations indicate that the model frequently attends to regions th
 
 While Grad-CAM does not provide causal explanations, it offers useful qualitative evidence that the classifier relies on semantically relevant image content.
 
----
 ## Spectral Attribution and Band Importance Analysis
 
 To better understand how individual Sentinel-2 spectral bands contribute to model predictions, an occlusion-based spectral attribution analysis was performed on the best-performing multispectral configuration:
@@ -1370,7 +1364,6 @@ The failure analysis suggests that:
 
 Overall, the failure cases indicate limitations of the dataset taxonomy and class separability rather than catastrophic model behaviour.
 
----
 ## Feature Space Analysis (t-SNE and UMAP)
 
 To better understand how different models organize semantic information internally, we visualized the learned feature embeddings from the penultimate layer using **t-distributed Stochastic Neighbor Embedding (t-SNE)** and **Uniform Manifold Approximation and Projection (UMAP)**.
@@ -1397,8 +1390,6 @@ A high-quality representation is characterized by:
 - Large inter-class separation.
 - Few samples near cluster boundaries.
 - Misclassified samples concentrated at cluster interfaces.
-
----
 
 # V1 RGB ResNet18 Baseline
 
@@ -1440,8 +1431,6 @@ Key observations:
 
 The correctness plots confirm that classification errors are not random; they occur predominantly in regions where semantic similarity between classes is highest.
 
----
-
 # V4 RGB + RedEdge + NIR + SWIR (Best Spectral Ablation)
 
 ### t-SNE Projection
@@ -1482,8 +1471,6 @@ Key observations:
 
 These results provide qualitative evidence that RedEdge, NIR, and SWIR bands contribute complementary information beyond RGB, improving semantic discrimination in the learned feature space.
 
----
-
 # V5 EfficientNet-B0
 
 ### t-SNE Projection
@@ -1498,14 +1485,14 @@ These results provide qualitative evidence that RedEdge, NIR, and SWIR bands con
 ![EfficientNet-B0 t-SNE by Correctness](reports/figures/feature_space/v5_rgb_efficientnet_b0_pretrained_seed42_tsne_by_correctness.png)
 **Figure 29**. T-SNE by correctness visualization of V5 rgb efficientnet-b0 adapted model
 
-### UMAP Projection
+## UMAP Projection
 
-#### By Class
+### By Class
 
 ![EfficientNet-B0 UMAP by Class](reports/figures/feature_space/v5_rgb_efficientnet_b0_pretrained_seed42_umap_by_class.png)
 **Figure 30**. UMAP per class visualization of V5 rgb efficientnet-b0 adapted model
 
-#### By Correctness
+### By Correctness
 
 ![EfficientNet-B0 UMAP by Correctness](reports/figures/feature_space/v5_rgb_efficientnet_b0_pretrained_seed42_umap_by_correctness.png)
 **Figure 31**. UMAP by correctness visualization of V5 rgb efficientnet-b0 adapted model
@@ -1524,30 +1511,28 @@ Key observations:
 
 This indicates that EfficientNet-B0 achieves an excellent trade-off between model complexity and representation quality.
 
----
-
 # V5 EfficientNet-B2
 
-### t-SNE Projection
+## t-SNE Projection
 
-#### By Class
+### By Class
 
 ![EfficientNet-B2 t-SNE by Class](reports/figures/feature_space/v5_rgb_efficientnet_b2_pretrained_seed42_tsne_by_class.png)
 **Figure 32**. T-SNE per class visualization of V5 rgb efficientnet-b2 adapted model
 
-#### By Correctness
+### By Correctness
 
 ![EfficientNet-B2 t-SNE by Correctness](reports/figures/feature_space/v5_rgb_efficientnet_b2_pretrained_seed42_tsne_by_correctness.png)
 **Figure 33**. T-SNE by correctness visualization of V5 rgb efficientnet-b2 adapted model
 
-### UMAP Projection
+## UMAP Projection
 
-#### By Class
+### By Class
 
 ![EfficientNet-B2 UMAP by Class](reports/figures/feature_space/v5_rgb_efficientnet_b2_pretrained_seed42_umap_by_class.png)
 **Figure 34**. UMAP per class visualization of V5 rgb efficientnet-b2 adapted model
 
-#### By Correctness
+### By Correctness
 
 ![EfficientNet-B2 UMAP by Correctness](reports/figures/feature_space/v5_rgb_efficientnet_b2_pretrained_seed42_umap_by_correctness.png)
 **Figure 35**. UMAP by correctness visualization of V5 rgb efficientnet-b2 adapted model
@@ -1566,30 +1551,28 @@ Key observations:
 
 The representation quality aligns closely with the model's strong classification performance.
 
----
-
 # V5 ResNet50
 
-### t-SNE Projection
+## t-SNE Projection
 
-#### By Class
+### By Class
 
 ![ResNet50 t-SNE by Class](reports/figures/feature_space/v5_rgb_resnet50_pretrained_seed42_tsne_by_class.png)
 **Figure 36**. T-SNE per class visualization of V5 rgb efficientnet-b0 adapted model
 
-#### By Correctness
+### By Correctness
 
 ![ResNet50 t-SNE by Correctness](reports/figures/feature_space/v5_rgb_resnet50_pretrained_seed42_tsne_by_correctness.png)
 **Figure 37**. T-SNE by correctness visualization of V5 rgb resnet-50 adapted model
 
-### UMAP Projection
+## UMAP Projection
 
-#### By Class
+### By Class
 
 ![ResNet50 UMAP by Class](reports/figures/feature_space/v5_rgb_resnet50_pretrained_seed42_umap_by_class.png)
 **Figure 38**. UMAP by per class visualization of V5 rgb resnet-50 adapted model
 
-#### By Correctness
+### By Correctness
 
 ![ResNet50 UMAP by Correctness](reports/figures/feature_space/v5_rgb_resnet50_pretrained_seed42_umap_by_correctness.png)
 **Figure 39**. UMAP by correctness visualization of V5 rgb resnet-50 adapted model
@@ -1608,8 +1591,6 @@ Key observations:
 
 The results confirm that deeper residual networks can learn rich semantic embeddings even from relatively small remote-sensing image patches.
 
----
-
 # Cross-Model Comparison
 
 The feature-space visualizations reveal several important trends:
@@ -1622,7 +1603,7 @@ The feature-space visualizations reveal several important trends:
 | EfficientNet-B2 | Excellent | Excellent | Excellent |
 | ResNet50 | Excellent | Excellent | Excellent |
 
-### Main Findings
+## Main Findings
 
 1. All models learn meaningful semantic representations.
 2. Spectral augmentation (RedEdge + NIR + SWIR) improves feature-space organization relative to RGB-only inputs.
@@ -1683,7 +1664,6 @@ The robustness analysis reveals that:
 * The model is highly robust to moderate noise and illumination changes.
 * Spectral selection contributes more strongly to performance than simply increasing the number of bands.
 
----
 ## Reproducibility
 
 A major objective of TerraSight is to ensure full experimental reproducibility.
@@ -1729,7 +1709,6 @@ Benefits include:
 * Improved statistical robustness
 * Reduced variance due to stochastic training behaviour
 
----
 
 ## Installation
 
@@ -1755,6 +1734,111 @@ pip install -e .
 pip install -r requirements.txt
 python -c "import terrasight; print('Installation successful')"
 ```
+
+## Streamlit User Interface
+
+### Interactive Workflow and Inference Dashboard
+
+TerraSight includes an optional Streamlit-based graphical user interface that provides access to the complete project workflow and enables interactive model inference without using command-line commands.
+
+The Streamlit dashboard supports:
+
+#### Dataset Management
+
+* Select RGB and multispectral dataset locations.
+* Copy datasets into the expected project directory structure.
+* Validate dataset organization and integrity.
+
+#### Data Preparation
+
+* Run train/test dataset splitting.
+* Verify dataset consistency before training.
+
+#### Model Training
+
+The interface provides one-click execution of:
+
+* RGB baseline training
+* RGB training from scratch
+* Multispectral training from scratch
+* Adapted pretrained multispectral training
+* Best-performing spectral configuration (RGB + RedEdge + NIR + SWIR)
+
+#### Reporting and Analysis
+
+Users can generate:
+
+* Prediction probability tables
+* Model comparison figures
+* Per-class F1-score analysis
+* Reliability and calibration reports
+* Statistical significance analyses
+* Spectral separability analyses
+* Report asset validation checks
+
+#### Reproducibility Verification
+
+The dashboard supports:
+
+* Reproducibility command testing
+* Full automated test-suite execution
+
+### Interactive Inference
+
+The inference module automatically discovers trained models from:
+
+```text
+results/v1/
+results/v4/
+results/v5/
+```
+
+and allows users to:
+
+1. Select a trained model.
+2. Upload RGB or multispectral imagery.
+3. Run inference.
+4. Inspect class probabilities.
+5. Visualize Grad-CAM explanations.
+6. Compare confidence distributions.
+
+#### Supported Input Types
+
+| Input Type    | Supported Formats |
+| ------------- | ----------------- |
+| RGB           | JPG, JPEG, PNG    |
+| Multispectral | TIFF, TIF         |
+
+#### Model Explainability
+
+For RGB models, Grad-CAM visualizations can be generated directly within the interface.
+
+The Grad-CAM module highlights image regions that contribute most strongly to the predicted land-cover class, providing an interpretable explanation of model behaviour.
+
+#### Persistent Inference State
+
+The interface maintains inference results using Streamlit session-state management. This allows users to:
+
+* Switch between probability views and Grad-CAM visualizations.
+* Preserve predictions after interface updates.
+* Explore explanations without rerunning inference.
+
+### Launching the Interface
+
+Start the dashboard using:
+
+```bash
+streamlit run app.py
+```
+
+After startup, open the displayed local URL in a web browser.
+
+### Purpose
+
+The Streamlit interface is intended as a convenience layer for experimentation, demonstration, and model exploration.
+
+The official reproducibility pathway remains the command-line workflow documented throughout this repository.
+
 
 ## Dataset Preparation
 
